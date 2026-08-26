@@ -27,32 +27,63 @@ def user_input():
             spliting_points_exers = user_inpt.split()
             points = spliting_points_exers[0]
             exercises = spliting_points_exers[1]
-            points_list.append(int(points))
-            exercises_list.append(int(exercises))
-    return points_list
+            if  0<= int(points) <= 20:
+                points_list.append(int(points))
+            else:
+                pass
+            if 0<= int(exercises) <=  100:
+                exercises_list.append(int(exercises))
+            else:
+                pass
+    sum_points_exs = sum(exercises_list) + sum(points_list)
+    return sum_points_exs
 
 
 '''
 This function call the previece fucntion "user_input": that return points lists
 --> calculation of length_list_points and return final result of everage.
 '''
-def points_average(points_arr):
-    user_input()
-    length_points = len(points_arr)
-    points_sum = 0
-    for num in points_arr:
-        points_sum += num
-
-    points_average_resulth = points_sum / length_points
+def points_average(final_sum):
+    # points_sum = sum(points_arr)
+    points_average_resulth = final_sum // 10
 
     return points_average_resulth
 
+def grade(grad_point):
+    if grad_point <= 14:
+        return 0
+    elif 15 <= grad_point <= 17:
+        return 1
+    elif 18 <= grad_point <= 20:
+        return 2
+    elif 21 <= grad_point <= 23:
+        return 3
+    elif 24 <= grad_point <= 27:
+        return 4
+    elif 28 <= grad_point <= 30:
+        return 5
+
+
+def final_output(finall_sum, grad):
+    print("Statistics:\n")
+    print("Points Average: ", finall_sum)
+    # print("Pass percentage: ", Pass_percentage)
+    print("Grade distribution: ", grad)
+
+
+    pass
+
+
+     
+     
 
 
 # main function that hold our process and fucntion calls
 def main():
     user_data = user_input()
-    points_average_var = points_average(user_data)
-    print(points_average_var)
-
+    average = points_average(user_data)
+    grad = grade(average)
+    # print(grad)
+    # user_input()))
+    print(final_output(user_data, grad))
 main()
