@@ -1,74 +1,38 @@
-# -------- pre requirments to start the app 
+"""
+Develpîng a larger programming project
+--> Statistics App
+In this exercise you will write a program for printing out grade statistics for a university course.
+"""
 
-"""
-1. User inputs Exam point and Exericice completed
-in till?
-2. is empty input: is user input empry input the second function start called!
-3. average and percentage
-4. grade_distribution function
-"""
-# user inputs 
+#function 01: user data
+#function 02: finding points average
+#function 03: pass percentage
+#function 04: grad distribution
+# fucntion 05: is formated fuction that show up fucns(2,3,4)
+
+'''
+Why functions approach, firslly for structure and organized 
+operation, and guratnted everything in output need order(end product formate)
+
+'''
+
 def user_input():
-    results = []
+    points_list = []
+    exercises_list = []
     while True:
-        data = input("Exam points and exercises completed:")
-        if  data == "":
+        user_inpt = str(input("Exam points and exercises completed: (points exerices ex, 00 00):"))
+        if user_inpt == "":
             break
-        parts = data.split()
-        points = int(parts[0])
-        exercices = int(parts[1])
-        results.append((points, exercices))
-    return results
+        else:
+            spliting_points_exers = user_inpt.split()
+            points = spliting_points_exers[0]
+            exercises = spliting_points_exers[1]
+            points_list.append(int(points))
+            exercises_list.append(int(exercises))
+    return points_list, exercises_list
 
-def calculate_average_points(results):
-    if not results:
-        return 0
-
-    total= sum(points for points, exercises in results)
-
-    return total/ len(results)
-
-def calculate_average_exercises(results):
-    if not results:
-        return 0
-    total = sum(exercises for points, exercises in results)
-    return total / len(results)
-
-def grad_distribution(points):
-    if points >= 18:
-        return 5
-    elif points >= 15:
-        return 4
-    elif points >= 12:
-        return 3
-    elif points >= 9:
-        return 2
-    elif points >= 6:
-        return 1
-    else:
-        return 0
-    
-
-def grade(results):
-    distribution = {g:0 for g in range(6)}
-    for points, exercises in results:
-        g = grade(points)
-        distribution[g] += 1
-    return distribution
-
-def print_statistics(results):
-    print(f"Average exam points: {calculate_average_points(results)}")
-    print(f"Average exercises completed: {calculate_average_exercises(results)}")
-    print("Grade distribution:")
-    distribution = grade(results)
-    for g in sorted(distribution):
-        print(f"{g}: {'*' * distribution[g]}")
+# main functio that hold our process and fucntion calls
 def main():
-
-    results = user_input()
-    print_statistics(results)
-
+    print(user_input())
 
 main()
-
-
