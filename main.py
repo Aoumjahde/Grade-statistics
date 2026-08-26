@@ -29,10 +29,30 @@ def user_input():
             exercises = spliting_points_exers[1]
             points_list.append(int(points))
             exercises_list.append(int(exercises))
-    return points_list, exercises_list
+    return points_list
 
-# main functio that hold our process and fucntion calls
+
+'''
+This function call the previece fucntion "user_input": that return points lists
+--> calculation of length_list_points and return final result of everage.
+'''
+def points_average(points_arr):
+    user_input()
+    length_points = len(points_arr)
+    points_sum = 0
+    for num in points_arr:
+        points_sum += num
+
+    points_average_resulth = points_sum / length_points
+
+    return points_average_resulth
+
+
+
+# main function that hold our process and fucntion calls
 def main():
-    print(user_input())
+    user_data = user_input()
+    points_average_var = points_average(user_data)
+    print(points_average_var)
 
 main()
