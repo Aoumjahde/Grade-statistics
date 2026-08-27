@@ -84,13 +84,27 @@ def grade_distribution(exercises_data, points_data):
         total_points = exam_pts + exercise_points
         student_grade = grade(total_points)
         grade_counts[student_grade] += 1
-
     return grade_counts 
 
-def final_output(epv ,grad_arr):
+
+def pass_percentage(exercises_data, points_data):
+    pass_count = 0
+    for i in range(len(points_data)):
+        exam_pts = points_data[i]
+        exercises = exercises_data[i]
+        exercise_points = exercises // 10  
+        total_points = exam_pts + exercise_points
+        student_grade = grade(total_points)
+        if student_grade >= 1:
+            pass_count += 1
+    percentage = (pass_count / len(points_data)) * 100
+    return percentage
+
+
+def final_output(epv ,pass_perc, grad_arr):
     print("Statistics:")
     print("Points Average: ", epv)
-
+    print("Pass Percentage: ", pass_perc)
     print("Grade distribution:")
     for i in range(5,-1,-1):
         starts = "*"*grad_arr[i]
@@ -107,7 +121,8 @@ def final_output(epv ,grad_arr):
 def main():
     exercises_array, points_array = user_input()
     grade_dist = grade_distribution(exercises_array, points_array)
+    pass_perc = pass_percentage(exercises_array, points_array)
     points_average_dict = points_average(exercises_array, points_array)
-    print(final_output(points_average_dict, grade_dist))
+    print(final_output(points_average_dict, pass_perc, grade_dist))
     
 main()
