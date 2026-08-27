@@ -35,19 +35,31 @@ def user_input():
                 exercises_list.append(int(exercises))
             else:
                 pass
-    sum_points_exs = sum(exercises_list) + sum(points_list)
-    return sum_points_exs
+    
+    return [exercises_list, points_list]
+
+
+def points_average(exercises_data, points_data):
+    total_list = []
+    for i in range(len(points_data)):
+        exam_pts = points_data[i]
+        exercises = exercises_data[i]
+        exercise_points = exercises // 10
+        total_points = exam_pts + exercise_points
+        total_list.append(total_points)
+
+
+    final_value = sum(total_list) / len(total_list)
+
+    return final_value
+
 
 
 '''
 This function call the previece fucntion "user_input": that return points lists
 --> calculation of length_list_points and return final result of everage.
 '''
-def points_average(final_sum):
-    # points_sum = sum(points_arr)
-    points_average_resulth = final_sum // 10
 
-    return points_average_resulth
 
 def grade(grad_point):
     if grad_point <= 14:
@@ -64,9 +76,9 @@ def grade(grad_point):
         return 5
 
 
-def final_output(finall_sum, grad):
+def final_output(epv ,grad):
     print("Statistics:\n")
-    print("Points Average: ", finall_sum)
+    print("Points Average: ", epv)
     # print("Pass percentage: ", Pass_percentage)
     print("Grade distribution: ", grad)
 
@@ -80,10 +92,8 @@ def final_output(finall_sum, grad):
 
 # main function that hold our process and fucntion calls
 def main():
-    user_data = user_input()
-    average = points_average(user_data)
-    grad = grade(average)
-    # print(grad)
-    # user_input()))
-    print(final_output(user_data, grad))
+    exercises_array, points_array = user_input()
+    exercice_points_average = points_average(exercises_array, points_array)
+    grad = grade(exercice_points_average)
+    print(final_output(exercice_points_average ,grad))
 main()
