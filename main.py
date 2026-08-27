@@ -62,7 +62,7 @@ This function call the previece fucntion "user_input": that return points lists
 
 
 def grade(grad_point):
-    if grad_point <= 14:
+    if 0<= grad_point <= 14:
         return 0
     elif 15 <= grad_point <= 17:
         return 1
@@ -75,15 +75,28 @@ def grade(grad_point):
     elif 28 <= grad_point <= 30:
         return 5
 
+def grade_distribution(exercises_data, points_data):
+    grade_counts = [0, 0, 0, 0, 0, 0]
+    for i in range(len(points_data)):
+        exam_pts = points_data[i]
+        exercises = exercises_data[i]
+        exercise_points = exercises // 10  
+        total_points = exam_pts + exercise_points
+        student_grade = grade(total_points)
+        grade_counts[student_grade] += 1
 
-def final_output(epv ,grad):
-    print("Statistics:\n")
+    return grade_counts 
+
+def final_output(epv ,grad_arr):
+    print("Statistics:")
     print("Points Average: ", epv)
-    # print("Pass percentage: ", Pass_percentage)
-    print("Grade distribution: ", grad)
+
+    print("Grade distribution:")
+    for i in range(5,-1,-1):
+        starts = "*"*grad_arr[i]
+        print(f"{i}: {starts}")
 
 
-    pass
 
 
      
@@ -93,7 +106,8 @@ def final_output(epv ,grad):
 # main function that hold our process and fucntion calls
 def main():
     exercises_array, points_array = user_input()
-    exercice_points_average = points_average(exercises_array, points_array)
-    grad = grade(exercice_points_average)
-    print(final_output(exercice_points_average ,grad))
+    grade_dist = grade_distribution(exercises_array, points_array)
+    points_average_dict = points_average(exercises_array, points_array)
+    print(final_output(points_average_dict, grade_dist))
+    
 main()
